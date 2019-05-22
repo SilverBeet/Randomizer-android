@@ -1,2 +1,2 @@
-# Ranomizer-android
+# Randomizer-android
 # Learning react native
