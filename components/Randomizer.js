@@ -10,10 +10,6 @@ export default class Randomizer extends Component {
         super(props)
         
         this.state = { 
-            randomNum: {
-                current: 0,
-                next: 0
-            },
 
             form: {
                 food: 'Pizza',
@@ -54,43 +50,31 @@ export default class Randomizer extends Component {
         
     }
     
-    Randomize = () => {
-        let index = Math.floor(Math.random() * this.state.randomData.length);
-        
-    
-        if (this.state.randomNum.current !== this.state.randomNum.next) {
-
-            this.state.randomNum.current = this.state.randomNum.next
-            console.log(`Current: ${this.state.randomNum.current}`)
-
-            this.state.form = {
-                food: this.state.randomData[this.state.randomNum.current].food,
-                drink: this.state.randomData[this.state.randomNum.current].drink  
-            } 
-            
-            this.setState({
-                form:this.state.form
-            })
-
-        } else if (this.state.randomNum.current === this.state.randomNum.next) {
-
-            this.state.randomNum.current = (this.state.randomNum.next === this.state.randomData.length - 1 ? this.state.randomNum.next - 1 : this.state.randomNum.next + 1)
-            console.log(`Current: ${this.state.randomNum.current}`)
-
-            this.state.form = {
-                food: this.state.randomData[this.state.randomNum.current].food,
-                drink: this.state.randomData[this.state.randomNum.current].drink  
-            } 
-            
-            this.setState({
-                form:this.state.form
-            })
+    randomizeNumber = (maxNum) => {
+        let index = Math.floor(Math.random() * maxNum);
+        if (this.current !== this.next) {
+            if (isNaN(this.current)) this.current = 0;
+            else this.current = this.next;
+        } else if (this.current === this.next) {
+            if (isNaN(this.current)) this.current = 0;
+            else this.current = (this.next === maxNum - 1 ? this.next - 1 : this.next + 1);
         }
-
-        this.state.randomNum.next = index
-        console.log(`Next:    ${this.state.randomNum.next}`)
-
+        
+        this.next = index;
+        return this.current;
     } 
+
+    Randomize = () => {
+        let i = this.randomizeNumber(this.state.randomData.length)
+        newData = {
+            food: this.state.randomData[i].food,
+            drink: this.state.randomData[i].drink
+        }
+        this.setState({
+            form:newData
+        })
+    } 
+
     render() {
         return (
             <View style={styles.formWrapper}>
