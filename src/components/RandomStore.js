@@ -1,24 +1,30 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 
 const _storeData = async (sus) => {
   try {
-    if (AsyncStorage.getItem('sustenance') !== null) {
-      await AsyncStorage.setItem('sustenance', JSON.stringify(sus));
+    if (await _retrieveData() !== null) {
+      const result = JSON.parse(await _retrieveData());
+      result.push(sus);
+      await AsyncStorage.setItem('sustenance', JSON.stringify(result));
     } else {
-      const data = await JSON.parse(_retrieveData());
-      data.append(sus)
+      const data = [];
+      data.push(sus)
+      await AsyncStorage.setItem('sustenance', JSON.stringify(data));
     }
   } catch (error) {
     console.log(error);
   }
 }
 
+const _clearData = async () => await AsyncStorage.clear();
+
 const _retrieveData = async () => {
   try {
     const value = await AsyncStorage.getItem('sustenance');
     if (value !== null) {
-      return values
+      return value
     }
+    return null
   } catch (error) {
     console.log(error)
   }
@@ -26,5 +32,6 @@ const _retrieveData = async () => {
 
 export {
   _storeData,
-  _retrieveData
+  _retrieveData,
+  _clearData
 }

@@ -17,7 +17,7 @@ export default class RandomizerButton extends Component {
                 >
                     <Image
                         style={styles.button}
-                        source={require('../src/assets/images/dice.png')}
+                        source={require('../assets/images/dice.png')}
                     />
                 </TouchableOpacity >
             </View>

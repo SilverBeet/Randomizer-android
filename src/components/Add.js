@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
 import { Modal, Text, TextInput, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
+import { _storeData, _retrieveData, _clearData } from './RandomStore';
 
 export default class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    modalVisible: false,
+      modalVisible: false,
       text: '',
-      form: {
-        food: '',
-        drink: ''
-      }
+      food: '',
+      drink: ''
     };
   }
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+
+  submitForm() {
+    const form = {
+      food: this.state.food,
+      drink: this.state.drink,
+    };
+    _storeData(form);
+    this.setState({
+      food: '',
+      drink: '',
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -34,7 +46,7 @@ export default class Add extends Component {
               >
                 <Image
                   style={styles.closeButton}
-                  source={require('../src/assets/images/add.png')}
+                  source={require('../assets/images/add.png')}
                 />
               </TouchableOpacity>
             </View>
@@ -44,20 +56,24 @@ export default class Add extends Component {
               <TextInput 
                 placeholder="Food..." 
                 style={styles.input}
+                onChangeText={(food) => this.setState({food})}
+                value={this.state.food}
               />
               <Text style={styles.label}>Drink</Text>
               <TextInput
                 placeholder="Drink..."
                 style={styles.input}
+                onChangeText={(drink) => this.setState({drink})}
+                value={this.state.drink}
               />
               <View style={styles.addButtonWrapper}>
-                <TouchableOpacity style={styles.addButton}>
+                <TouchableOpacity
+                  style={styles.addButton}
+                  onPress={this.submitForm.bind(this)}
+                >
                   <Text style={{textAlign: 'center', color: '#ffffff'}}>Add</Text>
                 </TouchableOpacity>
               </View>
-              <Text>
-                {this.state.form.food}
-              </Text>
             </View>
           </View>
         </Modal>
@@ -70,7 +86,7 @@ export default class Add extends Component {
         >
           <Image
             style={styles.button}
-            source={require('../src/assets/images/add.png')}
+            source={require('../assets/images/add.png')}
           />  
         </TouchableOpacity>
       </View>

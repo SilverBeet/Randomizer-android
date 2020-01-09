@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
-import Randomizer from './components/Randomizer';
-import SplashScreen from './components/splashScreen';
+import Randomizer from './src/components/Randomizer';
+import SplashScreen from './src/components/splashScreen';
 
 export default class App extends Component {
 
