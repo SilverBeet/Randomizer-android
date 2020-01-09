@@ -29,11 +29,10 @@ const styles = StyleSheet.create({
     buttonWrapper: {
         flex: 1,
         alignItems: 'center',
-        marginTop: '60%',
+        marginTop: '30%',
     },
     button: {
         height: 70,
         width: 70
     }
-    
 });

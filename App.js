@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar} from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import Randomizer from './components/Randomizer';
 import SplashScreen from './components/splashScreen';
 
@@ -14,7 +14,7 @@ export default class App extends Component {
 
 	performTimeConsumingTask = async () => {
 		return new Promise((resolve) =>
-			setTimeout(
+			setTimeout( 
 				() => {
 					resolve('result')
 				},
@@ -24,8 +24,6 @@ export default class App extends Component {
 	}
 
 	async componentDidMount() {
-		// Preload data from an external API
-		// Preload data using AsyncStorage
 		const data = await this.performTimeConsumingTask();
 
 		if (data !== null) {
@@ -36,16 +34,14 @@ export default class App extends Component {
 	}
 
 	render() {
-		
 		if (this.state.isLoading) {
 			return <SplashScreen />
 		}
-		
 		return ( 
-			<View style = {styles.body} >
+			<View style = { styles.body }>
 				<StatusBar 
-                    backgroundColor="#813434"
-                />
+					backgroundColor = "#813434" 
+				/>
 				<Randomizer />
 			</View>  
 		);
@@ -57,8 +53,6 @@ const styles = StyleSheet.create({
 	body: {
 		height: '100%',
 		width: '100%',
-		backgroundColor: "#813434",
-		borderColor: '#a5bd1e91',
-		borderWidth: 1,
+		backgroundColor: '#813434',
 	}
 });
