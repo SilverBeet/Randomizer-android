@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
     flex: 1,
   }, 
   body: {
-		height: '100%',
-		width: '100%',
-		backgroundColor: '#813434',
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#813434',
   },
   formWrapper: {
     margin: '10%',
